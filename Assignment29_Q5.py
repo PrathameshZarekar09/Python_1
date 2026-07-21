@@ -1,8 +1,8 @@
 def main():
 
-    file = input("Enter file name")
+    file = input("Enter file name: ")
 
-    string = input("Enter string")
+    string = input("Enter string: ")
 
     fobj = open(file,"r")
 
