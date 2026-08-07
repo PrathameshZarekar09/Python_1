@@ -24,6 +24,7 @@ for result in df["FinalResult"]:
     if result == 1:
         count = count+1
 print("Student Passed: ",count)
+print(Border)
 
 
 
@@ -36,3 +37,4 @@ for result in df["FinalResult"]:
     if result == 0:
         count = count+1
 print("Student Failed: ",count)
+print(Border)
