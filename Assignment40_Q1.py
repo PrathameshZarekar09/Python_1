@@ -1,0 +1,132 @@
+import pandas as pd 
+
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+
+Border = "--"*50
+
+def StudentClassifier(DataPath):
+
+    ##########################################################################
+    # Step 1: Load The Data Set
+    ##########################################################################
+    print(Border)
+    print("Step 1: Load The Data Set")
+    print(Border)
+
+    df = pd.read_csv(DataPath)
+
+    print("Dataset Loaded Succesfully!")
+    print("Here are some following entries of the dataset")
+    print(df.head())
+    print(Border)
+
+
+    
+    ##########################################################################
+    # Step 2: EDA
+    ##########################################################################
+    print(Border)
+    print("Step 2: EDA")
+    print(Border)
+
+    df.dropna(inplace = True)
+    print("Shape of Dataset: ",df.shape)
+    print("Total Columns: ",df.shape[1])
+    print("Column Names: ",list(df.columns))
+    print("Total Entries in the Dataset: ",df.shape[0])
+    print("Statistical Report of the Dataset: ",df.describe())
+    print(Border)
+
+
+
+    ##########################################################################
+    # Step 3: Seperate Independent and Dependent Variables
+    ##########################################################################
+    print(Border)
+    print("Step 3: Seperate Independent and Dependent Variables")
+    print(Border)
+
+    #X = Independent Variable/ Features
+    #Y = Dependent Variables / Label
+    X = df.drop(columns=["FinalResult"])
+    Y = df["FinalResult"]
+    print("Shape of X: ",X.shape)
+    print("Shape of Y: ",Y.shape)
+    print("Input columns: ",X.columns.tolist())
+    print("Output columns: FinalResult")
+    print(Border)
+
+
+
+    ##########################################################################
+    # Step 4: Split Dataset for training and testing
+    ##########################################################################
+    print(Border)
+    print("Step 4: Split Dataset for training and testing")
+    print(Border)
+
+    X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size = 0.2, random_state=42)
+    print("Following are some Details of Trained and Tested Data: ")
+    print("Shape of Trained Data (X_train): ",X_train.shape)
+    print("Shape of Test Data (X_test): ",X_test.shape)
+
+    print("Shape of Trained Data (Y_train): ",Y_train.shape)
+    print("Shape of Test Data (Y_test): ",Y_test.shape)
+
+    print(Border)
+
+
+
+    ##########################################################################
+    # Step 5: Build The Model
+    ##########################################################################
+    print(Border)
+    print("Step 5: Build The Model")
+    print(Border)
+
+    Model = DecisionTreeClassifier(max_depth = 5)
+    print("Model Build Sucessfuly...")
+    print(Border)
+
+
+
+    ##########################################################################
+    # Step 6: Train the model
+    ##########################################################################
+    print(Border)
+    print(" Step 6: Training the Model....")
+    print(Border)
+
+    Model.fit(X_train,Y_train)
+    print("Model Trained Sucessfully.....")
+    print(Border)
+
+    ##########################################################################
+    # Step 7: Using model.feature_importances_
+    ##########################################################################
+    print(Border)
+    print("Step 7: Using model.feature_importances_")
+    print(Border)
+
+    print(Model.feature_importances_)
+    print(Border)
+
+
+
+    ##########################################################################
+    # Step 8: Using model.feature_importances_ and detailed explanation
+    ##########################################################################
+    print(Border)
+    print("Step 8: Using model.feature_importances_ and detailed explanation")
+    print(Border)
+
+    for feature, importance in zip(X.columns, Model.feature_importances_):
+        print(feature ,":", importance)
+    print(Border)
+
+def main():
+    StudentClassifier("student_performance_ml.csv")
+
+if __name__ == "__main__":
+    main()
