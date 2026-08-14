@@ -186,6 +186,27 @@ def StudentClassifier(DataPath):
 
     
     
+    ##########################################################################
+    # Step 12: Identify Misclassified Students
+    ##########################################################################
+    print(Border)
+    print("Step 12: Identify Misclassified Students")
+    print(Border)
+    
+    Misclassified = Y_test!=Y_Pred
+
+    print("Misclassified Students: ")
+    print(X_test[Misclassified])
+
+    print("Expected Result: ")
+    print(Y_test[Misclassified])
+
+    print("Predicted Result: ")
+    print(Y_Pred[Misclassified])
+
+    print("Total Misclassified Students: ",Misclassified.sum())
+    print(Border)
+    
     
     
     ##########################################################################
