@@ -50,7 +50,7 @@ def StudentClassifier(DataPath):
 
     #X = Independent Variable/ Features
     #Y = Dependent Variables / Label
-    X = df.drop(columns=["FinalResult","PreviousScore","AssignmentsCompleted","SleepHours"]) #Removes column FinalResult,PreviousScore,Assignmentcomplted,SleepHours
+    X = df.drop(columns=["FinalResult"]) 
     Y = df["FinalResult"]
     print("Shape of X: ",X.shape)
     print("Shape of Y: ",Y.shape)
@@ -67,7 +67,7 @@ def StudentClassifier(DataPath):
     print("Step 4: Split Dataset for training and testing")
     print(Border)
 
-    X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size = 0.2, random_state=42)
+    X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size = 0.2, random_state=42,stratify=Y)
     print("Following are some Details of Trained and Tested Data: ")
     print("Shape of Trained Data (X_train): ",X_train.shape)
     print("Shape of Test Data (X_test): ",X_test.shape)
@@ -132,7 +132,7 @@ def StudentClassifier(DataPath):
     # Step 9: Test The Model
     ##########################################################################
     print(Border)
-    print("Step 10: Test The Model")
+    print("Step 9: Test The Model")
     print(Border)
 
     Y_Pred = Model.predict(X_test)
@@ -154,11 +154,41 @@ def StudentClassifier(DataPath):
     # Step 10: Calculate Accuracy
     ##########################################################################
     print(Border)
-    print("Step 11: Calculate Accuracy")
+    print("Step 10: Calculate Accuracy")
     print(Border)
 
     accuracy = accuracy_score(Y_test,Y_Pred)
     print("Accuracy is: ",accuracy*100,"%")
+    print(Border)
+
+
+
+    ##########################################################################
+    # Step 11: Predict Result of 5 new students
+    ##########################################################################
+    print(Border)
+    print("Step 11: Predict Result of 5 new students")
+    print(Border)
+
+    NewStudent = pd.DataFrame({
+        "StudyHours":[6,3,8,4,7],
+        "Attendance":[85,65,95,70,90],
+        "PreviousScore":[75,55,92,60,88],
+        "AssignmentsCompleted":[8,5,10,6,9],
+        "SleepHours":[7,6,8,5,7]
+        })
+    
+    Y_NewPred = Model.predict(NewStudent)
+    print("Prediction of 5 new students: ")
+    
+    for i, prediction in enumerate(Y_NewPred):
+        if prediction == 1:
+            result = "Pass"
+        else:
+            result = "Fail"
+        
+        print("Student",i+1,":",result)
+
     print(Border)
 
 def main():
