@@ -2,7 +2,7 @@ import pandas as pd
 
 from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
 
 
 Border = "---" * 40
@@ -133,7 +133,7 @@ def BuildModel():
     print("Building Model....")
     print(Border)
 
-    model = DecisionTreeClassifier(max_depth=None)
+    model = KNeighborsClassifier(n_neighbors=5)
 
     print("Model Built Successfully!")
 
