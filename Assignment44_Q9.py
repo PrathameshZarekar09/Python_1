@@ -1,0 +1,81 @@
+import pandas as pd 
+import matplotlib.pyplot as plt
+import numpy as np
+
+Data = {
+    "Name" : ["Amit", "Sagar", "Pooja"],
+    "Math" : [np.nan ,76,88],
+    "Science" : [91,np.nan,85],
+    #"English" : [75,85,82]
+}
+
+df = pd.DataFrame(Data)
+
+print("Shape Of Data: ")
+print(df.shape[0],"Rows",df.shape[1],"Columns")              #If you're just accessing stored information → usually no ()
+
+print("Data Types Of Data: ",df.dtypes)
+#print(df.info())
+
+
+
+print("Description of the Data: ")
+print(df.describe())    #If Python has to perform an action → usually ()
+
+
+                        
+'''df["Total"] = df["Math"] + df["Science"] + df["English"]
+print("New Data with Total: ")
+print(df)'''
+
+
+
+'''print("Students who Scored more than 85 in Science: ")
+print(df[df["Science"]>85])
+
+
+
+print("Replacing Pooja with Puja: ")
+df["Name"] = df["Name"].replace("Pooja","Puja")
+print(df)
+
+
+
+df = df.sort_values("Total", ascending = False)
+print("Sorted Total Column in descending order")
+print(df)
+
+
+
+print("Bar plot : Names vs Total Marks")
+plt.bar(df["Name"],df["Total"])
+plt.xlabel("Name")
+plt.ylabel("Total Marks")
+plt.title("Students total marks")
+plt.show()
+
+
+
+print("Line Chart of marks for Amit across all subject :")
+plt.plot(
+    ["Math", "Science", "English"],
+    [df.loc[df["Name"]=="Amit","Math"].iloc[0],
+     df.loc[df["Name"]=="Amit","Science"].iloc[0],
+     df.loc[df["Name"]=="Amit","English"].iloc[0]],
+     marker = "o"
+
+)
+plt.xlabel("Subject")
+plt.ylabel("Marks")
+plt.title("Amit VS Marks")
+plt.show()'''
+
+
+
+print("Data: ")
+print(df)
+
+df["Math"] = df["Math"].fillna(df["Math"].mean())
+df["Science"] = df["Science"].fillna(df["Science"].mean())
+print("Data After filling null values: ")
+print(df)
